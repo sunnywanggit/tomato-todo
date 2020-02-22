@@ -1,0 +1,12 @@
+.container{
+    background-color: #F0F7F6;
+    height: 100vh;
+    border: 1px solid red;
+}
+.clock{
+    border: 1px solid blue;
+    padding-bottom: 139rpx;
+}
+.stop{
+    margin-bottom: 48rpx;
+}

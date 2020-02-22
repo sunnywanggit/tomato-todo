@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "g-button": "../../components/_button/_button"
+  }
+}

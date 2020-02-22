@@ -1,0 +1,38 @@
+<view class="container">
+    <view class="header">
+        <!--        <view class="avatar">-->
+        <!--            <open-data type="userAvatarUrl"></open-data>-->
+        <!--        </view>-->
+        <button open-type="contact" class="qr">问题反馈</button>
+    </view>
+
+    <!--    <view class="tabs">-->
+    <!--        <view hover-class="hover-active"-->
+    <!--              class="{{tab==='tomato' && 'active'}}"-->
+    <!--              data-name="tomato"-->
+    <!--              bindtap="changeTab"-->
+    <!--        >-->
+    <!--            番茄历史-->
+    <!--        </view>-->
+    <!--        <view hover-class="hover-active"-->
+    <!--              class="{{tab==='task' && 'active'}}"-->
+    <!--              data-name="task"-->
+    <!--              bindtap="changeTab"-->
+    <!--        >-->
+    <!--            我完成的任务-->
+    <!--        </view>-->
+    <!--    </view>-->
+
+    <!--    <scroll-view scroll-y="true" class="lists">-->
+    <!--        <view class="item">-->
+    <!--            <view class="time">本周四</view>-->
+    <!--            <view class="content">-->
+    <!--                <text>14:00</text>-->
+    <!--                <view class="detail">完成了番茄小程序的部分开发</view>-->
+    <!--            </view>-->
+    <!--        </view>-->
+    <!--    </scroll-view>-->
+
+
+
+</view>

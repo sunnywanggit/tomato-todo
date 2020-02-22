@@ -1,0 +1,143 @@
+.login{
+    background-color: #f0f5f7;
+    display: flex;
+    flex-direction: column;
+}
+
+.login .avatar{
+    width: 100rpx;
+    height: 100rpx;
+    border: 50%;
+    overflow: hidden;
+}
+
+
+
+/*.container{*/
+/*    border: 1px solid red;*/
+/*    background-color: #f6f6f6;*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    align-items: flex-start;*/
+/*    box-sizing: border-box;*/
+/*}*/
+/*.header{*/
+/*    display: flex;*/
+/*    height: 170rpx;*/
+/*    align-items: center;*/
+/*    padding: 0 45rpx;*/
+/*    background-color: #fff;*/
+/*    font-size: 22rpx;*/
+/*    margin-bottom: 23rpx;*/
+/*}*/
+/*.header .avatar{*/
+/*    border: 1px solid blue;*/
+/*    border-radius: 50%;*/
+/*    overflow: hidden;*/
+/*    width: 100rpx;*/
+/*    height: 100rpx;*/
+/*    margin-right: 20rpx;*/
+/*}*/
+
+/*.header .details{*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    justify-content: center;*/
+/*    flex: 1;*/
+/*}*/
+
+/*.header .details .name{*/
+/*    font-size: 23rpx;*/
+/*}*/
+
+/*.tabs{*/
+/*    display: flex;*/
+/*    border: 1px solid red;*/
+/*    background-color: #fff;*/
+/*    flex-wrap: nowrap;*/
+/*    justify-content: space-between;*/
+/*}*/
+/*.tabs view{*/
+/*    flex-grow: 1;*/
+/*    color: red;*/
+/*}*/
+/*.tabs .active{*/
+/*    border-bottom: 4rpx solid red;*/
+/*}*/
+/*.container .lists{*/
+/*    flex: 1;*/
+/*    border: 1rpx solid blue;*/
+/*    padding: 0 24rpx;*/
+/*    box-sizing: border-box;*/
+/*    overflow: scroll;*/
+/*}*/
+
+/*.container .lists .item{*/
+/*    background-color: #fff;*/
+/*    font-size: 32rpx;*/
+/*    color: #333;*/
+/*    border-radius: 8rpx;*/
+/*    padding: 16rpx 28rpx 35rpx 40rpx;*/
+/*    box-shadow: 0rpx 2rpx 6rpx 0rpx rgba(0,0,0,0.1);*/
+/*    margin-bottom: 32rpx;*/
+/*}*/
+
+/*.container .lists .item .time{*/
+/*    font-size: 38rpx;*/
+/*    font-weight: bold;*/
+/*    margin-bottom: 24rpx;*/
+/*}*/
+/*.container .lists .item .content{*/
+/*    display: flex;*/
+/*    padding-bottom: 24rpx;*/
+/*}*/
+
+/*.container .lists .item .content text{*/
+/*    padding-right:25rpx;*/
+/*}*/
+/*.container .lists .item .content detail{*/
+/*    flex: 1;*/
+/*    flex-wrap: wrap;*/
+/*}*/
+
+/*.qr::after{border: none}*/
+/*.qr{background: transparent;color: #FE996F;font-size: 24rpx}*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

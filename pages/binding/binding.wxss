@@ -1,0 +1,76 @@
+
+.wrapper {
+    padding: 60rpx 50rpx;
+    height: 100vh;
+}
+
+.title {
+    font-size: 26rpx;
+    color: #333;
+    margin-bottom: 50rpx;
+}
+
+.input-wrapper {
+}
+
+.input-wrapper input {
+    border: 1rpx solid #F6705A;
+    margin-bottom:50rpx;
+    line-height: 90rpx;
+    border-radius: 10rpx;
+    position: relative;
+    padding: 10rpx 20rpx;
+    font-size: 22rpx;
+}
+
+text {
+    display: flex;
+    justify-content: center;
+    font-size: 22rpx;
+    color: #F6705A;
+    margin-top: 20rpx;
+    align-content: center;
+}
+
+image{
+    width: 126%;
+    height:80%;
+    position: absolute;
+    bottom:-44%;
+    left: -13%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

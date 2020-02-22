@@ -1,0 +1,11 @@
+<view class="container">
+    <view class="clock"><t-clock text="{{formatedTime}}" fontSize="48"></t-clock></view>
+    <view wx:if="{{buttonHidden}}">
+        <view class="stop"><t-button text="{{switch}}" size="mini" bindtap="onPause" ></t-button></view>
+        <view class="giveUp"><t-button text="放弃" type="default" size="mini" bindtap="onGiveUp"></t-button></view>
+    </view>
+    <view class="more"><t-button text="再来一组" size="mini" wx:if="{{!buttonHidden}}" bindtap="onceMore"></t-button></view>
+    <t-confirm visible="{{visible}}" placeholder="为什么要放弃呢？" bindcancel="onCancel" bindconfirm="onConfirm"></t-confirm>
+    <t-confirm placeholder="你完成了什么任务呀" visible="{{whatFinishedConfirmVisible}}" bindconfirm="finishedConfirm"
+    bindcancel="cancelFinishedConfirm"></t-confirm>
+</view>
