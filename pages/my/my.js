@@ -1,67 +1,35 @@
-// pages/my/my.js
+const { http } = require('../../utils/http.js');
+
 Page({
-
-    /**
-     * 页面的初始数据
-     */
     data: {
-        tab: 'tomato'
+        tab: "tomato",
+        tomatoes: {},
+        todos: {},
+        my: {}
     },
-    changeTab: function (event) {
-        let name = event.currentTarget.dataset.name;
-        this.setData({tab:name})
-    },
-
-    onLoad: function (options) {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     */
-    onReady: function () {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面显示
-     */
     onShow: function () {
-
+        this.fetchTomatoes()
+        this.fetchTodos()
+        this.setData({my: wx.getStorageSync('my')})
     },
-
-    /**
-     * 生命周期函数--监听页面隐藏
-     */
-    onHide: function () {
-
+    fetchTomatoes(){
+        http.get('/tomatoes', { is_group: "yes" })
+            .then(response => {
+                this.setData({ tomatoes: response.data.resources })
+            })
+        console.log('tomatoes');
+        console.log(this.data.tomatoes);
     },
-
-    /**
-     * 生命周期函数--监听页面卸载
-     */
-    onUnload: function () {
-
+    fetchTodos(){
+        http.get('/todos', { is_group: "yes" })
+            .then(response => {
+                this.setData({ todos: response.data.resources })
+            })
+        console.log('todos');
+        console.log(this.data.todos);
     },
-
-    /**
-     * 页面相关事件处理函数--监听用户下拉动作
-     */
-    onPullDownRefresh: function () {
-
-    },
-
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    onReachBottom: function () {
-
-    },
-
-    /**
-     * 用户点击右上角分享
-     */
-    onShareAppMessage: function () {
-
+    changeTab(event){
+        let name = event.currentTarget.dataset.name
+        this.setData({ tab: name })
     }
 })

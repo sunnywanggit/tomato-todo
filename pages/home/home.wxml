@@ -1,8 +1,20 @@
 <view class="home-container">
     <scroll-view class="todoList" scroll-y="true">
-        <view class="item" wx:for="{{lists}}" data-index="{{index}}" wx:key="{{item.id}}" bindtap="finishTask" >
-            <view class="select {{item.completed && 'active'}} "></view>
-            <text>{{item.description}}</text>
+        <view class="item" wx:for="{{lists}}"
+              wx:if="{{!item.completed}}"
+              data-index="{{index}}"
+              data-id="{{item.id}}"
+              wx:key="{{item.id}}">
+            <view class="select {{item.completed && 'active'}} "
+                  data-index="{{index}}"
+                  data-id="{{item.id}}"
+                  bindtap="finishTask"></view>
+            <text
+                    data-index="{{index}}"
+                    data-id="{{item.id}}"
+                    bindtap="changeTaskCon"
+            >{{item.description}}
+            </text>
         </view>
     </scroll-view>
     <g-button text="创建任务" type="change" class="createButton" bindtap="createTask"></g-button>
@@ -11,5 +23,12 @@
             <g-clock text="点击开始闹钟" bindtap="startTiming"></g-clock>
         </view>
     </view>
+    <!--    修改已创建任务内容-->
+    <g-confirm visible="{{alertConVisible}}"
+               placeholder="输入你要修改的内容"
+               bindconfirm="alertCon"
+               bindcancel="cancelCon"
+               value="{{taskValue}}"
+    ></g-confirm>
     <g-confirm visible="{{visible}}" placeholder="我完成了什么" bindconfirm="confirm" bindcancel="cancel"></g-confirm>
 </view>

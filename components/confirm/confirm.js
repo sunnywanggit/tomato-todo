@@ -2,11 +2,15 @@ Component({
     properties: {
         visible: {
             "type": Boolean,
-            "value": false
+            "value": true
         },
         placeholder: {
             "type": String,
             "value": ''
+        },
+        value:{
+            type:String,
+            value:''
         }
     },
     data: {
@@ -15,6 +19,7 @@ Component({
     methods: {
         confirm: function () {
             this.triggerEvent('confirm', this.data.inputValue)
+            this.setData({inputValue:this.properties.value})
         },
         cancel: function () {
             this.triggerEvent('cancel')

@@ -1,33 +1,47 @@
+let {http} = require('../../utils/http.js')
+
 Page({
     data: {
         //一个番茄的时间
-        time: 1500,
+        time: 5,
         formatedTime: '',
         timer: null,
         switch: '暂停',
         visible: false,
         reasonText: '',
         buttonHidden: true,
-        whatFinishedConfirmVisible:false,
+        whatFinishedConfirmVisible: false,
         // 完成内容
-        finishedText:''
+        finishedText: '',
+        tomato: {}
     },
     onShow: function () {
         this.timing()
+        //创建一个番茄
+        http.post('/tomatoes').then(response => {
+            this.setData({tomato: response.data.resource})
+            console.log(this.data.tomato);
+        })
     },
     // 确认提交完成框
-    finishedConfirm:function(event){
-        this.setData({whatFinishedConfirmVisible:false})
-        this.setData({finishedText:event.detail})
+    finishedConfirm: function (event) {
+        this.setData({whatFinishedConfirmVisible: false})
+        this.setData({finishedText: event.detail})
+        http.put(`/tomatoes/${this.data.tomato.id}`,{
+            description:event.detail,
+            aborted:false
+        }).then(response=>{
+            this.setData({tomato:response.data.resource})
+        })
     },
     //取消提交完成框
-    cancelFinishedConfirm:function(){
-        this.setData({whatFinishedConfirmVisible:false})
+    cancelFinishedConfirm: function () {
+        this.setData({whatFinishedConfirmVisible: false})
     },
     // 再来一组
-    onceMore:function(){
-        this.setData({buttonHidden:true})
-        this.setData({time:1500})
+    onceMore: function () {
+        this.setData({buttonHidden: true})
+        this.setData({time: 1500})
         this.timing()
     },
 
@@ -36,8 +50,8 @@ Page({
         this.formatTime()
         this.data.timer = setInterval(() => {
             if (this.data.time === 1) {
-                this.setData({buttonHidden:false})
-                this.setData({whatFinishedConfirmVisible:true})
+                this.setData({buttonHidden: false})
+                this.setData({whatFinishedConfirmVisible: true})
                 clearInterval(this.data.timer)
             }
             this.data.time--
@@ -83,19 +97,34 @@ Page({
         this.setData({reasonText: event.detail})
         this.setData({visible: false})
         this.setData({time: 0})
-        // 路由跳转
-        wx.navigateBack({
-            to:-1
+        http.put(`/tomatoes/${this.data.tomato.id}`, {
+            description: event.detail,
+            aborted: true
+        }).then(response => {
+            // 路由跳转
+            wx.navigateBack({
+                to: -1
+            })
         })
+
     },
     onHide: function () {
+        clearInterval(this.data.timer)
+        http.put(`/tomatoes/${this.data.tomato.id}`, {
+            description: "退出放弃",
+            aborted: true
+        })
     },
 
     /**
      * 生命周期函数--监听页面卸载
      */
     onUnload: function () {
-
+        clearInterval(this.data.timer)
+        http.put(`/tomatoes/${this.data.tomato.id}`, {
+            description: "退出放弃",
+            aborted: true
+        })
     },
 
     /**

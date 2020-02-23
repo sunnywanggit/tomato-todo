@@ -7,12 +7,16 @@ Page({
      */
     data: {
         visible: false,
-        lists: []
+        lists: [],
+        alertConVisible: false,
+        taskValue:'',
+        id:'',
+        index:''
     },
-    onShow(){
-        http.get('/todos?completed=false').then(respsonse=>{
+    onShow() {
+        http.get('/todos?completed=false').then(respsonse => {
             let unCompleted = respsonse.data.resources
-            this.setData({lists:unCompleted})
+            this.setData({lists: unCompleted})
         })
     },
     // 确认任务创建
@@ -22,13 +26,13 @@ Page({
         if (content) {
             http.post(
                 '/todos',
-                { description: content }
+                {description: content}
             ).then(response => {
                 let todo = response.data.resource;
-                let newArr = []
+                let newArr = this.data.lists
                 newArr.push(todo)
-                this.setData({lists:newArr})
-                this.setData({visible:false})
+                this.setData({lists: newArr})
+                this.setData({visible: false})
             })
         }
     },
@@ -36,15 +40,57 @@ Page({
     cancel(event) {
         this.setData({visible: false})
     },
-    //创建一个任务
+    //打开创建个任务
     createTask() {
         this.setData({visible: true})
-
     },
+    // 完成任务
     finishTask(event) {
         let index = event.currentTarget.dataset.index;
+        let id = event.currentTarget.dataset.id
         this.data.lists[index].completed = true;
-        this.setData({lists: this.data.lists})
+        http.put(`/todos/${id}`, {
+            completed: true
+        }).then(response => {
+            let todo = response.data.resource
+            this.data.lists[index] = todo
+            this.setData({lists: this.data.lists})
+        })
+    },
+    // 修改已创建的任务内容
+    changeTaskCon(event) {
+        let id = event.currentTarget.dataset.id
+        this.setData({id:id})
+        let index = event.currentTarget.dataset.index;
+        this.setData({index:index})
+
+        let content = this.data.lists[index].description
+        console.log(content);
+        // console.log(event);
+        this.setData({taskValue:content})
+        // console.log(this.data.taskValue);
+
+        this.setData({alertConVisible: true})
+
+    },
+    // 确认修改任务内容
+    alertCon(event) {
+        let id = this.data.id
+        let index = this.data.index
+        // console.log(this.data.lists[index]);
+        http.put(`/todos/${id}`, {
+            completed: false,
+            description: event.detail
+        }).then(response => {
+            let todo = response.data.resource
+            this.data.lists[index] = todo
+            this.setData({lists: this.data.lists})
+        })
+        this.setData({alertConVisible: false})
+    },
+    cancelCon() {
+
+        this.setData({alertConVisible: false})
     },
     //点击开始闹钟
     startTiming() {
@@ -53,3 +99,50 @@ Page({
         })
     },
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,52 +1,44 @@
-
-
-<view class="login">
-    <view class="avatar">
-        <open-data type="userAvatarUrl"></open-data>
+<view class="cantainer">
+    <view class="header">
+        <view class="avatar">
+            <open-data type='userAvatarUrl'></open-data>
+        </view>
+        <view class="details">
+            <open-data type='userNickName' class="name"></open-data>
+            <navigator url="/pages/binding/binding" wx:if="{{!my.account}}">绑定pc账号</navigator>
+        </view>
+        <button open-type="contact" class="qr">问题反馈</button>
+        <!-- <view class="qr">问题反馈</view> -->
     </view>
-    <view class="details">
-        <open-data type="userNickName"></open-data>
+
+    <view class="tabs">
+        <view hover-class='hover-active'
+              class="{{tab === 'tomato' && 'active'}}"
+              data-name="tomato" bindtap="changeTab">番茄历史</view>
+        <view hover-class='hover-active'
+              class="{{tab === 'task' && 'active'}}"
+              data-name="task" bindtap="changeTab">我完成的任务</view>
     </view>
+
+    <scroll-view scroll-y="true" class="lists" wx:if="{{tab === 'tomato'}}">
+        <view class="item" wx:for="{{tomatoes}}" wx:for-index="key" wx:key="index">
+            <wxs src="../../utils/formattor.wxs" module="formattor"></wxs>
+            <view class="time">{{formattor.monthFormat(key)}}</view>
+            <view class="content" wx:for="{{tomatoes[key]}}" wx:for-index="index" wx:key="index">
+                <text>{{formattor.dateFormat(item.created_at,"hh:mm")}}</text>
+                <view class="detail">{{item.description}}</view>
+            </view>
+        </view>
+    </scroll-view>
+
+    <scroll-view scroll-y="true" class="lists" wx:if="{{tab === 'task'}}">
+        <view class="item" wx:for="{{todos}}" wx:for-index="key" wx:key="index">
+            <wxs src="../../utils/formattor.wxs" module="formattor"></wxs>
+            <view class="time">{{formattor.monthFormat(key)}}</view>
+            <view class="content" wx:for="{{todos[key]}}" wx:for-index="index" wx:key="index">
+                <text>{{formattor.dateFormat(item.created_at,"hh:mm")}}</text>
+                <view class="detail">{{item.description}}</view>
+            </view>
+        </view>
+    </scroll-view>
 </view>
-
-
-
-
-<!--<view class="container">-->
-<!--    <view class="header">-->
-<!--&lt;!&ndash;        <view class="avatar">&ndash;&gt;-->
-<!--&lt;!&ndash;            <open-data type="userAvatarUrl"></open-data>&ndash;&gt;-->
-<!--&lt;!&ndash;        </view>&ndash;&gt;-->
-<!--        <button open-type="contact" class="qr">问题反馈</button>-->
-<!--    </view>-->
-
-<!--&lt;!&ndash;    <view class="tabs">&ndash;&gt;-->
-<!--&lt;!&ndash;        <view hover-class="hover-active"&ndash;&gt;-->
-<!--&lt;!&ndash;              class="{{tab==='tomato' && 'active'}}"&ndash;&gt;-->
-<!--&lt;!&ndash;              data-name="tomato"&ndash;&gt;-->
-<!--&lt;!&ndash;              bindtap="changeTab"&ndash;&gt;-->
-<!--&lt;!&ndash;        >&ndash;&gt;-->
-<!--&lt;!&ndash;            番茄历史&ndash;&gt;-->
-<!--&lt;!&ndash;        </view>&ndash;&gt;-->
-<!--&lt;!&ndash;        <view hover-class="hover-active"&ndash;&gt;-->
-<!--&lt;!&ndash;              class="{{tab==='task' && 'active'}}"&ndash;&gt;-->
-<!--&lt;!&ndash;              data-name="task"&ndash;&gt;-->
-<!--&lt;!&ndash;              bindtap="changeTab"&ndash;&gt;-->
-<!--&lt;!&ndash;        >&ndash;&gt;-->
-<!--&lt;!&ndash;            我完成的任务&ndash;&gt;-->
-<!--&lt;!&ndash;        </view>&ndash;&gt;-->
-<!--&lt;!&ndash;    </view>&ndash;&gt;-->
-
-<!--&lt;!&ndash;    <scroll-view scroll-y="true" class="lists">&ndash;&gt;-->
-<!--&lt;!&ndash;        <view class="item">&ndash;&gt;-->
-<!--&lt;!&ndash;            <view class="time">本周四</view>&ndash;&gt;-->
-<!--&lt;!&ndash;            <view class="content">&ndash;&gt;-->
-<!--&lt;!&ndash;                <text>14:00</text>&ndash;&gt;-->
-<!--&lt;!&ndash;                <view class="detail">完成了番茄小程序的部分开发</view>&ndash;&gt;-->
-<!--&lt;!&ndash;            </view>&ndash;&gt;-->
-<!--&lt;!&ndash;        </view>&ndash;&gt;-->
-<!--&lt;!&ndash;    </scroll-view>&ndash;&gt;-->
-
-
-
-<!--</view>-->
