@@ -31,7 +31,7 @@ function monthFormat(date){
 
   if (dateMonth[0] === "0") { dateMonth = dateMonth[1] }
   if (dateDay[0] === "0") { dateDay = dateDay[1] }
-  return dateMonth + "月" + dateMonth + "日"
+  return dateMonth + "月" + dateDay + "日"
 }
 
 module.exports = { dateFormat: dateFormat, monthFormat: monthFormat }

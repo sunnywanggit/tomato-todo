@@ -1,16 +1,13 @@
 
 .wrapper {
     padding: 60rpx 50rpx;
-    height: 100vh;
+    border: 1px solid red;
 }
 
 .title {
     font-size: 26rpx;
     color: #333;
     margin-bottom: 50rpx;
-}
-
-.input-wrapper {
 }
 
 .input-wrapper input {

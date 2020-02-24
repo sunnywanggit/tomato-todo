@@ -13,7 +13,10 @@ Page({
         whatFinishedConfirmVisible: false,
         // 完成内容
         finishedText: '',
-        tomato: {}
+        tomato: {},
+        lists: [],
+        id:'',
+        index:''
     },
     onShow: function () {
         this.timing()
@@ -22,17 +25,38 @@ Page({
             this.setData({tomato: response.data.resource})
             console.log(this.data.tomato);
         })
+
+        http.get('/todos?completed=false').then(respsonse => {
+            let unCompleted = respsonse.data.resources
+            this.setData({lists: unCompleted})
+        })
     },
     // 确认提交完成框
     finishedConfirm: function (event) {
-        this.setData({whatFinishedConfirmVisible: false})
-        this.setData({finishedText: event.detail})
-        http.put(`/tomatoes/${this.data.tomato.id}`,{
-            description:event.detail,
-            aborted:false
-        }).then(response=>{
-            this.setData({tomato:response.data.resource})
-        })
+        let content = event.detail;
+        if (content) {
+            http.post(
+                '/todos',
+                {description: content}
+            ).then(response => {
+                let todo = response.data.resource;
+                let newArr = this.data.lists
+                newArr.push(todo)
+                this.setData({lists: newArr})
+                console.log(this.data.lists.indexOf(todo));
+                let todoIndex = this.data.lists.indexOf(todo)
+                this.data.id = this.data.lists[todoIndex].id
+
+                this.data.lists[todoIndex].completed = true;
+                http.put(`/todos/${this.data.id}`, {
+                    completed: true
+                }).then(response => {
+                    this.setData({lists: this.data.lists})
+                })
+
+                this.setData({whatFinishedConfirmVisible:false})
+            })
+        }
     },
     //取消提交完成框
     cancelFinishedConfirm: function () {
