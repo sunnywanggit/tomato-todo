@@ -1,14 +1,15 @@
 <view class="wrapper">
-    <view class="title" wx:if="{{onOff}}">绑定PC账号</view>
-    <view class="title" wx:if="{{!onOff}}">注册PC账号</view>
+    <view class="title" >绑定PC账号</view>
     <view class="input-wrapper">
-        <input class="account" bindinput="inputAccount" placeholder="账号" value="{{accountValue}}"/>
-        <input password="true" class="password" bindinput="passwordInput" placeholder="密码" value="{{passwordValue}}"/>
+        <input class="account" bindinput="inputAccount" placeholder="账号"
+        value="{{accountValue}}"
+        />
+        <input password="true" class="password" bindinput="passwordInput" placeholder="密码"
+               value="{{passwordValue}}"
+        />
     </view>
-    <g-button text="绑定" size="mini" wx:if="{{onOff}}"></g-button>
-    <g-button text="注册" size="mini" wx:if="{{!onOff}}"></g-button>
-    <text bindtap="register" wx:if="{{onOff}}">还没有PC账号？点击注册吧，兄弟！</text>
-    <text bindtap="register" wx:if="{{!onOff}}">还没有绑定PC账号？点击绑定吧，兄弟！</text>
+    <g-button text="绑定" size="mini" bindtap="onRegister"></g-button>
+    <text  >还没有绑定PC账号？点击绑定吧，兄弟！</text>
     <image src="../../imgs/tomato.png" alt=""></image>
 </view>
 
