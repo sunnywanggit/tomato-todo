@@ -1,8 +1,8 @@
 {
   "pages": [
     "pages/home/home",
-    "pages/tomato/tomato",
     "pages/login/login",
+    "pages/tomato/tomato",
     "pages/my/my",
     "components/confirm/confirm",
     "pages/index/index",
