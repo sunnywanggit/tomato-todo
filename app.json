@@ -1,10 +1,10 @@
 {
   "pages": [
+    "pages/tomato/tomato",
+    "pages/home/home",
+    "pages/login/login",
     "pages/binding/binding",
     "pages/my/my",
-    "pages/login/login",
-    "pages/home/home",
-    "pages/tomato/tomato",
     "components/confirm/confirm",
     "pages/index/index",
     "pages/logs/logs"

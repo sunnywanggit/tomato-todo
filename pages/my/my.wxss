@@ -11,6 +11,7 @@
     color: #FE996F;
     font-size: 22rpx;
     margin-bottom: 10rpx;
+    padding: 0 20rpx;
 }
 .title .avatar {
     width: 88rpx;

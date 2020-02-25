@@ -11,7 +11,7 @@ Page({
         alertConVisible: false,
         taskValue:'',
         id:'',
-        index:''
+        index:'',
     },
     onShow() {
         http.get('/todos?completed=false').then(respsonse => {

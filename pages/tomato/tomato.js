@@ -3,7 +3,7 @@ let {http} = require('../../utils/http.js')
 Page({
     data: {
         //一个番茄的时间
-        time: 5,
+        time: 1500,
         formatedTime: '',
         timer: null,
         switch: '暂停',

@@ -17,7 +17,7 @@
             </text>
         </view>
     </scroll-view>
-    <g-button text="创建任务" type="change" class="createButton" bindtap="createTask"></g-button>
+    <g-button text="创建任务" type="change" class="createButton" bindtap="createTask" ></g-button>
     <view class="tomato-wrapper">
         <view class="tomato">
             <g-clock text="点击开始闹钟" bindtap="startTiming"></g-clock>
@@ -30,5 +30,8 @@
                bindcancel="cancelCon"
                value="{{taskValue}}"
     ></g-confirm>
-    <g-confirm visible="{{visible}}" placeholder="我完成了什么" bindconfirm="confirm" bindcancel="cancel"></g-confirm>
+<!--    创建任务-->
+    <g-confirm
+            visible="{{visible}}"
+            placeholder="我完成了什么" bindconfirm="confirm" bindcancel="cancel"></g-confirm>
 </view>

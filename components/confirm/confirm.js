@@ -11,6 +11,10 @@ Component({
         value:{
             type:String,
             value:''
+        },
+        autoFocus:{
+            type:Boolean,
+            value:false
         }
     },
     data: {
