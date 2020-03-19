@@ -119,17 +119,22 @@ Page({
     // 点击放弃confirm确认按钮
     onConfirm: function (event) {
         this.setData({reasonText: event.detail})
+        console.log(this.data.reasonText)
         this.setData({visible: false})
         this.setData({time: 0})
-        http.put(`/tomatoes/${this.data.tomato.id}`, {
-            description: event.detail,
-            aborted: true
-        }).then(response => {
-            // 路由跳转
-            wx.navigateBack({
-                to: -1
+        if(!this.data.reasonText){
+            console.log('i give up');
+        }else{
+            http.put(`/tomatoes/${this.data.tomato.id}`, {
+                description: event.detail,
+                aborted: true
+            }).then(response => {
+                // 路由跳转
+                wx.navigateBack({
+                    to: -1
+                })
             })
-        })
+        }
 
     },
     onHide: function () {

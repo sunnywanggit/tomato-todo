@@ -10,7 +10,9 @@
     </view>
     <g-button text="绑定" size="mini" bindtap="onRegister"></g-button>
     <text  >还没有绑定PC账号？点击绑定吧，兄弟！</text>
-    <image src="../../imgs/tomato.png" alt=""></image>
+<!--    <view class="image">-->
+<!--        <image src="../../imgs/tomato.png" alt=""></image>-->
+<!--    </view>-->
 </view>
 
 

@@ -14,20 +14,28 @@ Page({
         index:'',
     },
     onShow() {
+
         http.get('/todos?completed=false').then(respsonse => {
             let unCompleted = respsonse.data.resources
             this.setData({lists: unCompleted})
         })
     },
+    //打开创建个任务
+    createTask() {
+        console.log('task');
+        this.setData({visible: true})
+    },
     // 确认任务创建
     confirm(event) {
-        console.log('confirm');
+        // console.log('confirm');
         let content = event.detail;
         if (content) {
             http.post(
                 '/todos',
                 {description: content}
             ).then(response => {
+                console.log(response);
+
                 let todo = response.data.resource;
                 let newArr = this.data.lists
                 newArr.push(todo)
@@ -39,10 +47,6 @@ Page({
     // 取消点击confirm框
     cancel(event) {
         this.setData({visible: false})
-    },
-    //打开创建个任务
-    createTask() {
-        this.setData({visible: true})
     },
     // 完成任务
     finishTask(event) {

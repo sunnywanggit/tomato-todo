@@ -1,5 +1,5 @@
 <view class="wrapper">
-    <view class="timing">距离结束还有：</view>
+    <view class="timing">距离结束还有</view>
     <view class="clock"><t-clock text="{{formatedTime}}" fontSize="48"></t-clock></view>
     <view wx:if="{{buttonHidden}}">
         <view class="stop"><t-button text="{{switch}}" size="mini" bindtap="onPause" ></t-button></view>

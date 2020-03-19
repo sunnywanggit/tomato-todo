@@ -1,6 +1,6 @@
 
 .wrapper {
-    padding: 60rpx 50rpx;
+    overflow: hidden;
 }
 
 .title {
@@ -31,13 +31,13 @@ text {
     align-content: center;
 }
 
-image{
-    width: 126%;
-    height:80%;
-    position: absolute;
-    bottom:-44%;
-    left: -13%;
-}
+/*.image{*/
+/*    width: 126%;*/
+/*    height:80%;*/
+/*    position: absolute;*/
+/*    bottom:-44%;*/
+/*    left: -13%;*/
+/*}*/
 
 
 
