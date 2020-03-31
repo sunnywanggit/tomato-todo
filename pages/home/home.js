@@ -17,6 +17,7 @@ Page({
 
         http.get('/todos?completed=false').then(respsonse => {
             let unCompleted = respsonse.data.resources
+            console.log(unCompleted);
             this.setData({lists: unCompleted})
         })
     },
@@ -27,13 +28,14 @@ Page({
     },
     // 确认任务创建
     confirm(event) {
-        // console.log('confirm');
+        console.log('confirm');
         let content = event.detail;
         if (content) {
             http.post(
                 '/todos',
                 {description: content}
             ).then(response => {
+                console.log('response');
                 console.log(response);
 
                 let todo = response.data.resource;
@@ -43,6 +45,29 @@ Page({
                 this.setData({visible: false})
             })
         }
+    },
+    addTodo(e) {
+        console.log(e.detail);
+        if (e.detail === '') {
+            wx.showToast({
+                icon: 'none',
+                title: '请输入任务内容'
+            })
+            return
+        }
+        let description = e.detail
+        http.post("/todos", {
+            description
+        })
+            .then(response => {
+                let newTodo = response.data.resource
+                this.data.toDoList.unshift(newTodo)
+                this.setData({
+                    toDoList: this.data.toDoList,
+                    visible: false,
+                    content: ""
+                })
+            })
     },
     // 取消点击confirm框
     cancel(event) {

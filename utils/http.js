@@ -1,52 +1,68 @@
-const {host,t_app_secret,t_app_id} = getApp().globalData
-
-const _http = (method,url,data) => {
-    return new Promise((resolve, reject) => {
+const {
+    host,
+    t_app_id,
+    t_app_secret
+} = getApp().globalData
+const _http = (url, data, method) => {
+    return new Promise((reslove, reject) => {
         wx.request({
             url: `${host}${url}`,
-            data:data,
+            data,
             header: {
                 Authorization: `Bearer ${wx.getStorageSync('X-token')}`,
                 "t-app-id": t_app_id,
-                "t-app-secret":t_app_secret
+                "t-app-secret": t_app_secret
             },
-            method:method,
+            method,
             dataType: 'json',
             success: (response) => {
                 let statusCode = response.statusCode
-                console.log(statusCode);
-                if (statusCode >= 400) {
-                    if(statusCode === 401){
-                        wx.removeStorageSync('me')
-                        wx.removeStorageSync('X-token')
-                        wx.redirectTo({
-                            url: '/pages/login/login'
-                        })
-                    }
-                    reject({statusCode, response})
+                if (statusCode === 401 || statusCode === 422) {
+                    wx.removeStorageSync("me")
+                    wx.removeStorageSync("X-token")
+                    wx.reLaunch({
+                        url: '/pages/login/login',
+                    })
+                    wx.showToast({
+                        icon: 'none',
+                        title: '登录已失效，请重新登录',
+                    })
+                    reject({
+                        statusCode,
+                        data: response.data
+                    })
+                } else if (statusCode === 500){
+                    wx.showToast({
+                        icon:'none',
+                        title: '网络异常，请重试',
+                    })
+                    reject({
+                        statusCode,
+                        data: response.data
+                    })
+
                 } else {
-                    console.log('success');
-                    resolve(response)
+                    reslove(response)
                 }
             },
-            fail: (errors) => {
-                wx.showToast({title: '请求失败', icon: 'none'})
-                reject(errors)
+            fail: (error) => {
+                wx.showToast({
+                    title: '请求失败',
+                    icon: 'none'
+                })
+                reject(error)
             }
         })
     })
-
 }
 
 const http = {
-    get: (url,params) => _http('GET', url,params),
-    post: (url, data) => _http('POST', url,data),
-    put: (url, data) => _http('PUT', url, data),
-    delete: (url, data) => _http('DELETE', url, data),
+    get: (url, params) => _http(url, params, 'GET'),
+    post: (url, params) => _http(url, params, 'POST'),
+    put: (url, params) => _http(url, params, 'PUT'),
+    delete: (url, params) => _http(url, params, 'DELETE')
 }
 
-module.exports={
+module.exports = {
     http
 }
-
-

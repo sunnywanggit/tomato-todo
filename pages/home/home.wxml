@@ -3,7 +3,6 @@
         <view class="item" wx:for="{{lists}}"
               wx:if="{{!item.completed}}"
               data-index="{{index}}"
-              data-id="{{item.id}}"
               wx:key="{{item.id}}">
             <view class="select {{item.completed && 'active'}} "
                   data-index="{{index}}"
@@ -33,5 +32,5 @@
 <!--    创建任务-->
     <g-confirm
             visible="{{visible}}"
-            placeholder="我完成了什么" bindconfirm="confirm" bindcancel="cancel"></g-confirm>
+            placeholder="我完成了什么" bindconfirm="addTodo" bindcancel="cancel"></g-confirm>
 </view>

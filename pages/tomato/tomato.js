@@ -20,7 +20,7 @@ Page({
     },
     onShow: function () {
         this.timing()
-        //创建一个番茄
+        创建一个番茄
         http.post('/tomatoes').then(response => {
             this.setData({tomato: response.data.resource})
             console.log(this.data.tomato);

@@ -1,35 +1,61 @@
-const {http} = require('../../utils/http.js')
-const {app_id, app_secret} = getApp().globalData
-
+const {
+    http
+} = require('../../utils/http.js')
+const {
+    app_id,
+    app_secret
+} = getApp().globalData
+// url: /sign_in/mini_program_user
+// data: { code, iv, encrypted_data, app_id, app_secret }
+// method: post
 Page({
-    data: {},
-    onShow() {
-        http.get('/todos')
+    data: {
+
     },
-    login(e) {
+    onReady: function(options) {
+
+    },
+    login: function(e) {
         let iv = e.detail.iv
         let encrypted_data = e.detail.encryptedData
-        let code
+        this.wxLogin(iv, encrypted_data)
+    },
+    wxLogin(iv, encrypted_data) {
         wx.login({
-            success(res) {
-                code = res.code
-                http.post('/sign_in/mini_program_user', {
-                    code,
-                    iv,
-                    encrypted_data,
-                    app_id,
-                    app_secret
-                }).then(response => {
-                    console.log(response);
-                    wx.setStorageSync('me', response.data.resource)
-                    wx.setStorageSync('X-token', response.header['X-token'])
+            success: res => {
 
-                    wx.reLaunch({
-                        url: '/pages/home/home'
-                    })
-                })
+                if (res.code) {
+                    this.signInUser(res.code, iv, encrypted_data)
+                } else {
+                    console.log('登录失败！' + res.errMsg)
+                }
             }
         })
-    }
+    },
+    signInUser(code, iv, encrypted_data) {
+        wx.showLoading({
+            title: '登录中...',
+        })
+        http.post('/sign_in/mini_program_user', {
+            code,
+            iv,
+            encrypted_data,
+            app_id,
+            app_secret
+        })
+            .then(response => {
 
+                console.log(response);
+                this.saveInformation(response)
+                wx.reLaunch({
+                    url: '/pages/home/home'
+                })
+            })
+            .catch(error=>{
+            })
+    },
+    saveInformation(response) {
+        wx.setStorageSync('me', response.data.resource)
+        wx.setStorageSync("X-token", response.header['X-token'])
+    }
 })
